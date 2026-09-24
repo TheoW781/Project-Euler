@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
+using static System.Convert;
+using static System.Math;
 
 namespace Project_Euler
 {
@@ -111,10 +114,42 @@ namespace Project_Euler
             //Console.WriteLine(primes[10000]);
 
 
+            //Euler 8. Complete
+
+            //Project Euler 8: Largest product of 13 adjacent digits of the 100 digit number
+            string bigNumber = "7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450";
+            long largestnumber = 0; //Changed to long because some values exceeded int limit
+            string temp = "";
+            long tempNumber = 1; //Declaring as 1 so not always 0
+            for (int i = 0; i < bigNumber.Length; i++) //Loop through until the end of the string
+            {
+                tempNumber = 1; //Reset tempNumber so not false.
+                if (bigNumber.Length - i < 13) //No need to continue after the last 13 digit sequence is reached
+                {
+                    break;
+                }
+                else
+                {
+                    temp = bigNumber.Substring(i, 13); //Make a substring of length 13
+
+                }
+                for (int j = 0; j < 13; j++) //Multiply each digit together
+                {
+                    if (temp.Contains("0")) //Multiplt by 0 = 0
+                    {
+                        break;
+                    }
+                    tempNumber = tempNumber * ToInt32(temp.Substring(j, 1)); //Multiply the temporary number by the next value in the substring (Multiply by 1 if first in string)
+                }
+                largestnumber = (tempNumber > largestnumber) ? tempNumber : largestnumber; //Ternary operator. If condition true, assign tempNumber to largestnumber else remain
+                    
+            }
+            WriteLine(largestnumber); //Correct. 23514624000
+
         }
         static ArrayList PrimeList (double maxNum) //Generates list of primes within the answer
         {
-            ArrayList primeNums = new ArrayList(Convert.ToInt32(maxNum)); //ArrayList is array but you can add values and there is no set data type
+            ArrayList primeNums = new ArrayList(ToInt32(maxNum)); //ArrayList is array but you can add values and there is no set data type
             int potentialPrime = 0;
             bool isPrime = true;
             primeNums.Add(2);
@@ -122,7 +157,7 @@ namespace Project_Euler
             for (potentialPrime = 4; potentialPrime < maxNum; potentialPrime++) //all values between 2 and the max provided
             {
                 isPrime = true; //start true so it only changes if not prime
-                for (int i = 2; i <= Math.Floor(Math.Sqrt(potentialPrime)); i++) //Square root to find the range of factors. <= becausre sqrt can be an integer. Math.floor just for the sake of it.
+                for (int i = 2; i <= Floor(Sqrt(potentialPrime)); i++) //Square root to find the range of factors. <= becausre sqrt can be an integer. Math.floor just for the sake of it.
                 {
                     if (potentialPrime % i == 0) //If has a factor
                     {
