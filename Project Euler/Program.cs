@@ -129,7 +129,7 @@ namespace Project_Euler
             WriteLine(biggestPalindrome);
         }
 
-        static void Euler7() //Project Euler 7 10,001st prime number. Completed
+        static void Euler7() //Project Euler 7: 10,001st prime number. Completed
         { 
             ArrayList primes = new ArrayList(); //Get list of primes
             primes = PrimeList(999999);
@@ -168,7 +168,7 @@ namespace Project_Euler
             WriteLine(largestnumber); //Correct. 23514624000
         }
 
-        static void Euler10() //Project Euler 10, Sum of all primes below 2 million. Complete
+        static void Euler10() //Project Euler 10: Sum of all primes below 2 million. Complete
         {
             List<int> Primes = SieveofEratosthenes(2000000);
             int[] primesArray = Primes.ToArray();
@@ -188,7 +188,7 @@ namespace Project_Euler
             WriteLine(primeSums); //Correct 142913828922
         }
 
-        static void Euler11() //Project Euler 11, Largest product in a grid. Complete
+        static void Euler11() //Project Euler 11: Largest product in a grid. Complete
         {
             int[,] integerGrid = { {08, 02, 22, 97, 38, 15, 00, 40, 00, 75, 04, 05, 07, 78, 52, 12, 50, 77, 91, 08 },
                                    { 49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 04, 56, 62, 00 },
